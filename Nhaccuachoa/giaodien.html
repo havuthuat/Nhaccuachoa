@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.flex-top{
+			display: flex;
+			background: #53b0e2;
+			height: 70px;
+		}
+		.logo{
+			flex-grow: 1;
+		}
+		.baihat{
+			flex-grow: 2;
+		}
+		.bangxephang{
+			flex-grow: 2;
+		}
+		.search{
+		}
+		input{
+			width: 350px;
+			height: 40px;
+		}
+		/**/
+		.dropbtn {
+		  background-color: #2daaed;
+		  color: white;
+		  padding: 16px;
+		  font-size: 16px;
+		  border: none;
+		} /* Style cho button */
+		.dropdown-content {
+		  display: none;
+		  position: absolute;
+		  background-color: #f1f1f1;
+		  min-width: 160px;
+		  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		  z-index: 1;
+		} /* Dách sách ẩn */
+		.dropdown-content a {
+		  color: black;
+		  padding: 12px 16px;
+		  text-decoration: none;
+		  display: block;
+		}/* Các danh sách được xếp theo grid */
+		.dropdown:hover /* tắt danh sách sau khi xổ xuống */
+		.dropdown-content {display: block;} /* có nó mới sổ xuống */
+
+		.dropdown:hover 
+		.dropbtn {background-color: #ee3147;} /* rê chuột vào button đổi màu*/
+		.baihatmoi{
+			display: flex;
+		}
+		.baimoi1{
+			margin-left: 75px;
+		}
+		.baimoi2{
+			margin-left: 75px;
+		}
+		/**/
+				.line{
+			margin-left: 10px;
+		}
+		.img{
+			width: 60px;
+			height: 60px;
+			margin-top: 20px;
+		}
+		h3{
+			font-weight: normal;
+		}
+		h5{
+			font-weight: normal;
+			color: grey;
+		}
+		.line3{
+			display: flex;
+			align-items: center;
+		}
+	</style>
+</head>
+<body>
+<!--  -->
+	<div class="flex-top">
+		<div class="logo">
+			<img src="music.png" width="">
+		</div>
+		<div class="baihat">
+			<div class="dropdown">
+  		<button class="dropbtn" style="height: 70px"><h3 style="color: black">Bài Hát</h3></button>
+  			<div class="dropdown-content">
+    			<a href="#">Nhạc Trẻ</a>
+    			<a href="#">Trữ Tình</a>
+    			<a href="#">Nhạc Cách Mạng</a>
+    			<a href="#">Nhạc Trịnh</a>
+  			</div>
+	</div>
+		</div>
+		<div class="bangxephang">
+			<h2>Bảng xếp hạng</h2>
+		</div>
+	</div> 
+<!--  -->
+	<div>
+		<p style="color: white">1</p>
+	</div>
+	<div class="search">
+		<center>
+			<input type="text" name="" placeholder="Tên bài hát" >	
+			<button style="height: 45px">tìm kiếm</button>
+		</center>
+	</div> 
+<!--  -->
+ 	<div>
+		<center>
+			<img src="anhnen.png" width="1200px" >
+		</center>
+	</div> 
+<!--  -->
+	<div>
+		<h1 style="color: #ff720b">Bài hát mới trong tuần</h1>
+	</div> 
+<!--  -->
+	<div id="container"></div>
+<!-- audio -->
+<button onclick="listen()"> play</button>
+
+<script type="text/javascript">
+		var music1 ={
+			imge: "img1.png",
+			name1: "Cô Thắm Không Về",
+			name2: "Phát Hồ, Jokes Bii, Thiện",
+			srcc: "cothamkhongve.mp3"
+		}
+		var music2 ={
+			imge: "img2.png",
+			name1: "Hongkong 12",
+			name2: "Nguyễn Trọng Tài, MC 12",
+			srcc: "hongkong.mp3"
+		}
+		var music3 ={
+			imge: "img3.png",
+			name1: "Đi Đu Đưa Đi",
+			name2: "Bích Phương",
+			srcc: "diduduadi.mp3"
+		}
+		var music4 ={
+			imge: "img4.png",
+			name1: "Ông Bà Anh",
+			name2: "Lê Thiện Hiếu",
+			srcc: "ongbaanh.mp3"
+
+		}
+		var music5 ={
+			imge: "img1.png",
+			name1: "Ai cần ai",
+			name2: "Bảo Anh",
+			srcc: "em.mp3"
+
+		}
+		var list = [music1,music2,music3,music4,music5];
+		var container = document.getElementById("container");
+		for (var  i= 0; i < list.length; i++) {
+			//Tạo thẻ div 
+			var line1 = document.createElement("div");
+			line1.className = "line";
+			var line2 = document.createElement("div");
+			line2.className = "line2";
+			var line3 = document.createElement("div");
+			line3.className = "line3";
+			var line4 = document.createElement("div");
+			line4.className = "line3";
+
+			//Đẩy ảnh vào 
+			var image = document.createElement("img");
+			image.className = "image";
+			image.src = list[i].imge;
+
+
+			//Đẩy tên vào
+			var namebaihat = document.createElement("h3");
+			namebaihat.innerText = list[i].name1;
+
+			var namecasy = document.createElement("h5");
+			namecasy.innerText = list[i].name2;
+
+			var nghe = document.createElement("button");
+			nghe.innerHTML = 'nghe';
+
+					nghe.onclick = function(arg) {
+						return function(){
+							if(document.getElementById("audio") != null){
+								document.getElementById("audio").remove();
+							}
+							var audio = document.createElement("AUDIO");
+							audio.id = 'audio';
+							if (audio.canPlayType("audio/mpeg")) {
+								audio.setAttribute("src",list[arg].srcc);
+							}
+							audio.setAttribute("controls", "controls");
+							document.body.appendChild(audio);
+						}
+					}(i);
+
+			line1.append(image);
+			line2.append(namebaihat);
+			line2.append(namecasy);
+			line4.append(nghe);
+
+
+			line3.append(line1);
+			line3.append(line2);
+			line3.append(line4);
+			
+
+			container.appendChild(line3);
+		}
+	</script>
+</body>
+
+</body>
+</html>
