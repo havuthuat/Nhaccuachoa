@@ -3,6 +3,8 @@
 <head>
 	<title></title>
 	<style type="text/css">
+		body{
+			background:black;		}
 		.flex-top{
 			display: flex;
 			background: #53b0e2;
@@ -78,6 +80,21 @@
 		.line3{
 			display: flex;
 			align-items: center;
+			margin-left: 50px;
+		}
+		.line4{
+			display: flex;
+			margin-left: 20px;
+			margin-right: 20px;
+			align-items: right;
+
+		}
+		button{
+			background: #fca8c1;
+			border-radius: 3px;
+		}
+		.colorName{
+			color: white;
 		}
 	</style>
 </head>
@@ -120,46 +137,49 @@
 	</div> 
 <!--  -->
 	<div>
-		<h1 style="color: #ff720b">Bài hát mới trong tuần</h1>
+		<h1 style="color: #ff720b">Bài hát mới trong tuần ></h1>
 	</div> 
 <!--  -->
 	<div id="container"></div>
-<!-- audio -->
-<button onclick="listen()"> play</button>
+	<div id="audioo">
 
+	</div>
+	<button id="backid" onclick="back()" style="display: none; ">Back</button>
+<!-- audio -->
 <script type="text/javascript">
 		var music1 ={
 			imge: "img1.png",
 			name1: "Cô Thắm Không Về",
 			name2: "Phát Hồ, Jokes Bii, Thiện",
-			srcc: "cothamkhongve.mp3"
+			srcc: "cothamkhongve.mp3",
 		}
 		var music2 ={
 			imge: "img2.png",
-			name1: "Hongkong 12",
+			name1: "Hongkong 12--------    ",
 			name2: "Nguyễn Trọng Tài, MC 12",
 			srcc: "hongkong.mp3"
 		}
 		var music3 ={
 			imge: "img3.png",
-			name1: "Đi Đu Đưa Đi",
+			name1: "Đi Đu Đưa Đi-------    ",
 			name2: "Bích Phương",
 			srcc: "diduduadi.mp3"
 		}
 		var music4 ={
 			imge: "img4.png",
-			name1: "Ông Bà Anh",
+			name1: "Ông Bà Anh --------",
 			name2: "Lê Thiện Hiếu",
 			srcc: "ongbaanh.mp3"
 
 		}
 		var music5 ={
 			imge: "img1.png",
-			name1: "Ai cần ai",
+			name1: "Ai cần ai-------------",
 			name2: "Bảo Anh",
 			srcc: "em.mp3"
 
 		}
+
 		var list = [music1,music2,music3,music4,music5];
 		var container = document.getElementById("container");
 		for (var  i= 0; i < list.length; i++) {
@@ -171,17 +191,19 @@
 			var line3 = document.createElement("div");
 			line3.className = "line3";
 			var line4 = document.createElement("div");
-			line4.className = "line3";
-
+			line4.className = "line4";
+			var line5 = document.createElement("div");
+			line5.className = "line4";
+			var line6 = document.createElement("div");
+			line6.className = "line4";
 			//Đẩy ảnh vào 
 			var image = document.createElement("img");
 			image.className = "image";
 			image.src = list[i].imge;
-
-
 			//Đẩy tên vào
 			var namebaihat = document.createElement("h3");
 			namebaihat.innerText = list[i].name1;
+			namebaihat.className = "colorName";
 
 			var namecasy = document.createElement("h5");
 			namecasy.innerText = list[i].name2;
@@ -189,36 +211,64 @@
 			var nghe = document.createElement("button");
 			nghe.innerHTML = 'nghe';
 
-					nghe.onclick = function(arg) {
-						return function(){
-							if(document.getElementById("audio") != null){
-								document.getElementById("audio").remove();
-							}
-							var audio = document.createElement("AUDIO");
+			var buttondownload = document.createElement("button");
+			buttondownload.innerHTML = 'download';
+			nghe.onclick = function(arg) {
+				return function(){
+					document.getElementById("backid").style.display = "block";
+					document.getElementById("audioo").style.display = "block";
+					document.getElementById("container").style.display = "none";
+					//
+					if(document.getElementById("audio") != null){
+						document.getElementById("audio").remove();
+					}
+					var audio = document.createElement("AUDIO");
 							audio.id = 'audio';
 							if (audio.canPlayType("audio/mpeg")) {
 								audio.setAttribute("src",list[arg].srcc);
 							}
 							audio.setAttribute("controls", "controls");
-							document.body.appendChild(audio);
-						}
+							line5.appendChild(audio);
+						}	
 					}(i);
-
+			buttondownload.onclick = function(ar){
+				return function(){
+					function download(dataurl, filename) {
+						  var a = document.createElement("a");
+						  a.href = dataurl;
+						  a.setAttribute("download", list[ar].srcc);
+						  a.click();
+						}
+						download("data:text/html,HelloWorld!", "baihat.mp3");
+						}
+			}(i);
 			line1.append(image);
 			line2.append(namebaihat);
 			line2.append(namecasy);
 			line4.append(nghe);
-
+			line6.append(buttondownload);
 
 			line3.append(line1);
 			line3.append(line2);
 			line3.append(line4);
+			line3.append(line6);
+			//line3.append(line5);
 			
-
 			container.appendChild(line3);
+			audioo.appendChild(line5);
+			console.log(audioo);
 		}
+		function back(){
+				document.getElementById("container").style.display = "block";
+				document.getElementById("backid").style.display = "none";
+				document.getElementById("audioo").style.display = "none";
+			}	
 	</script>
-</body>
-
+	<!-- <a href="img1.png" download="w3logo">
+  <img src="img1.png" alt="W3Schools" width="104" height="142">
+</a>
+<form method="get" action="cothamkhongve.mp3">
+   <button type="submit">Download!</button> -->
+</form>
 </body>
 </html>
